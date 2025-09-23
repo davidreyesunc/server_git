@@ -15,12 +15,17 @@ openssl req -new -key certs/server.key -out certs/server.csr -subj "/C=AR/ST=Cor
 # server.crt: Certificado público del servidor
 openssl x509 -req -days 3650 -in certs/server.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/server.crt
 
-# Generar el Certificado de un Cliente (una estación meteorológica)
+# Generar el Certificado para el Primer Cliente (Estación Metorológica)
 # Crear una clave privada para un cliente
-openssl genrsa -out certs/client.key 2048
+openssl genrsa -out certs/client_01.key 2048
 # Generar una solicitud de firma de certificado (CSR)
-openssl req -new -key certs/client.key -out certs/client.csr -subj "/C=AR/ST=Cordoba/L=Cordoba/O=LH_FCEFyN_UNC/CN=Mosquitto_Client"
+openssl req -new -key certs/client_01.key -out certs/client_01.csr -subj "/C=AR/ST=Cordoba/L=Cordoba/O=LH_FCEFyN_UNC/CN=Mosquitto_Client_01"
  # Firmar el CSR con la clave de la CA para obtener el certificado del cliente
 # client.key: Clave privada del cliente
 # client.crt: Certificado público del cliente
-openssl x509 -req -days 3650 -in certs/client.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/client.crt
+openssl x509 -req -days 3650 -in certs/client_01.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/client_01.crt
+
+# Generar el Certificado para el Segunda Estación Metorológica
+# openssl genrsa -out certs/client_02.key 2048
+# openssl req -new -key certs/client_02.key -out certs/client_02.csr -subj "/C=AR/ST=Cordoba/L=Cordoba/O=LH_FCEFyN_UNC/CN=Mosquitto_Client_02"
+# openssl x509 -req -days 3650 -in certs/client_02.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/client_02.crt
