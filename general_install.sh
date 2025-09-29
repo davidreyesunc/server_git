@@ -36,3 +36,9 @@ sudo usermod -aG docker $USER
 newgrp docker  
 # Test the instalation (without sudo)
 docker run hello-world
+
+#_____________________________________________________________________________________________________________________________
+# hostname
+# Se establece explícitamente el hostname de servidor ya que se utiliza en la autenticación del servidor 
+# por parte de las estaciones meteorológicas
+sudo hostnamectl set-hostname Meteo-Data-Server
