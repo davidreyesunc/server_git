@@ -1,0 +1,21 @@
+# How to Configure Mosquitto MQTT Broker in Docker
+# https://cedalo.com/blog/mosquitto-docker-configuration-ultimate-guide/
+
+
+version: '3.8'
+
+services:
+    mosquitto:
+        image: eclipse-mosquitto:latest
+        ports:
+            - 8883:8883
+        volumes:
+            - ./mosquitto_broker/config:/mosquitto_broker/config
+            - ./mosquitto_broker/data:/mosquitto_broker/data
+            - ./mosquitto_broker/log:/mosquitto_broker/log
+        networks:
+            - mosquitto_broker
+networks:
+    mosquitto:
+        name: docker-network
+        driver: bridge
